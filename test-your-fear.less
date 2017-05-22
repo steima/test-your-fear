@@ -2,6 +2,8 @@
 @gelb: #ECE243;
 @weiss: #FFFFFF;
 
+@title-font-size: 15vh;
+
 @font-face {
   font-family: "Circular Std Bold Italic";
   src: url('fonts/CircularStd-BoldItalic.otf');
@@ -14,7 +16,7 @@ body {
 }
 
 div.slide {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
 }
 
@@ -29,7 +31,8 @@ div#startscreen {
         transform: translate(-50%, -50%);
 
         position: absolute;
-        font-size: 5em;
+        font-size: @title-font-size;
+        width: 60%;
         line-height: 90%;
     }
     
@@ -40,7 +43,7 @@ div#startscreen {
         top: 63%;
         transform: translate(-50%, -50%) rotate(-1.7deg);
         width: 60%;
-        font-size: 1.7em;
+        font-size: 5.1vh;
     }
     
     div.button {
@@ -53,21 +56,21 @@ div#startscreen {
     }
         
     .yes {
-        font-size: 5em;
+        font-size: 15vh;
         left: 33%;
         top: 80%;
         transform: translate(-50%, -50%);
     }
 
     .no {
-        font-size: 4.1em;
+        font-size: 12.3vh;
         left: 64%;
         top: 80%;
         transform: translate(-50%, -50%);
         line-height: 80%;
         
         .smaller {
-            font-size: 0.4em;
+            font-size: 6vh;
         }  
     }
             
@@ -77,7 +80,9 @@ div#startscreen {
         left: 50%;
         top: 95%;
         transform: translate(-50%, -50%);
-        font-size: 1.23em;
+        font-size: 3.7vh;
+        width: 90%;
+        text-align: center;
     }
     
 }
