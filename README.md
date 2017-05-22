@@ -6,4 +6,3 @@ An interactive mobile game designed by Valerie Danzer implemented by [Matthias S
 
 # Implementation technology
 
-asdf
