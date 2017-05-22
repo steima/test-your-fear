@@ -1,0 +1,35 @@
+@rosa: #E6475F;
+@gelb: #ECE243;
+@weiss: #FFFFFF;
+
+@font-face {
+  font-family: "Circular Std Bold Italic";
+  src: url('CircularStd-BoldItalic.otf');
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+div.slide {
+    width: 100%;
+    height: 100vh;
+}
+
+div#startscreen {
+    background-color: @rosa;
+}
+
+div.slide div.title {
+    color: @gelb;
+    left: 52%;
+    top: 32%;
+    
+    transform: translate(-50%, -50%);
+    
+    position: absolute;
+    font-family: "Circular Std Bold Italic";
+    font-size: 6em;
+    border: 1px solid black;
+}
