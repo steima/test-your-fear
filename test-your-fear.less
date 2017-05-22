@@ -10,6 +10,7 @@
 body {
     margin: 0px;
     padding: 0px;
+    font-family: "Circular Std Bold Italic";
 }
 
 div.slide {
@@ -19,17 +20,63 @@ div.slide {
 
 div#startscreen {
     background-color: @rosa;
-}
+    
+    div.title {
+        color: @gelb;
+        left: 52%;
+        top: 32%;
 
-div.slide div.title {
-    color: @gelb;
-    left: 52%;
-    top: 32%;
+        transform: translate(-50%, -50%);
+
+        position: absolute;
+        font-size: 5em;
+    }
     
-    transform: translate(-50%, -50%);
+    div.teaser {
+        color: @weiss;
+        position: absolute;
+        left: 35%;
+        top: 63%;
+        transform: translate(-50%, -50%) rotate(-1.7deg);
+        width: 60%;
+        font-size: 1.7em;
+    }
     
-    position: absolute;
-    font-family: "Circular Std Bold Italic";
-    font-size: 6em;
-    border: 1px solid black;
+    div.button {
+        color: @gelb;
+        position: absolute;
+        border: 0.04em solid @gelb;
+        width: 27%;
+        height: 22%;
+        text-align: center;
+    }
+        
+    .yes {
+        font-size: 5em;
+        left: 33%;
+        top: 80%;
+        transform: translate(-50%, -50%);
+    }
+
+    .no {
+        font-size: 4.1em;
+        left: 64%;
+        top: 80%;
+        transform: translate(-50%, -50%);
+        line-height: 0.8em;
+        
+        .smaller {
+            font-size: 0.4em;
+        }  
+    }
+            
+    div.imprint {
+        color: @gelb;
+        position: absolute;
+        left: 50%;
+        top: 95%;
+        transform: translate(-50%, -50%);
+        font-size: 1.23em;
+    }
+    
 }
