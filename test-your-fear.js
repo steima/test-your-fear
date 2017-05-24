@@ -180,11 +180,17 @@ var tyf = {
         }
     },
     
+    lastOrientationUpdate: null,
+    
     /** Handle device orientation event */
     handleDeviceOrientation: function(evt) {
-        $('#orientG').html(evt.gamma.toFixed(3));
-        $('#orientB').html(evt.beta.toFixed(3));
-        $('#orientA').html(evt.alpha.toFixed(3));
+        var now = Date.now();
+        if(!this.lastOrientationUpdate || now - this.lastOrientationUpdate > 200) {
+            this.lastOrientationUpdate = now;
+            $('#orientG').html(evt.gamma.toFixed(3));
+            $('#orientB').html(evt.beta.toFixed(3));
+            $('#orientA').html(evt.alpha.toFixed(3));
+        }   
     },
     
     /** If we are on the ergebnis then we need to decide how to handle the click */
