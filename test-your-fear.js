@@ -163,6 +163,7 @@ var tyf = {
         
         if(found0DegreeGamma && found90DegreeGamma) {
             this.taskSuccess();
+            this.resetOrientationData();
         }
     },
     
@@ -235,6 +236,12 @@ var tyf = {
             };
             tyf.orientationDataInsertPosition = (tyf.orientationDataInsertPosition + 1) % 100;
         }   
+    },
+    
+    /** Clear the orientation data array */
+    resetOrientationData: function() {
+        tyf.orientationDataInsertPosition = 0;
+        tyf.orientationData = [];
     },
     
     /** If we are on the ergebnis then we need to decide how to handle the click */
