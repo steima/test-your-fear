@@ -206,7 +206,7 @@ var tyf = {
         if(this.lastTaskFailed) {
             this.setupRandomTask();
         }else{
-            
+            this.showSlide('startscreen');
         }
     },
     
