@@ -143,10 +143,11 @@ var tyf = {
         switch(this.selectedTask.taskKey) {
             case 'aliens': this.executeAlienTask();
             case 'spin': this.executeSpinTask();
+            case 'wave': this.executeWaveTask();
         }
     },
     
-    /** Check if the timeseries has a tilting pattern */
+    /** Check if the timeseries has a tilting pattern in gamma */
     executeAlienTask: function() {
         var found90DegreeGamma;
         var found0DegreeGamma;
@@ -167,19 +168,19 @@ var tyf = {
         }
     },
     
-    /** Check if the timeseries contains a 360° pattern */
+    /** Check if the timeseries contains a 360° pattern in alpha */
     executeSpinTask: function() {
-        var segemnts = [];
+        var segments = [];
         for(var i=0;i<this.orientationData.length;i++) {
             var orientation = this.orientationData[i];
             var s = Math.floor(orientation.alpha/30);
-            segemnts[s] = true;
+            segments[s] = true;
         }
         
-        if(segemnts.length == 12) {
+        if(segments.length == 12) {
             var allSegmentsFilled = true;
-            for(var i=0;i<segemnts.length;i++) {
-                if(!segemnts[i]) {
+            for(var i=0;i<segments.length;i++) {
+                if(!segments[i]) {
                     allSegmentsFilled = false;
                 }
             }
@@ -187,6 +188,13 @@ var tyf = {
                 this.taskSuccess();
             }
         }
+    },
+    
+    /** Check if the timeseries contains a pattern in beta which is
+        from 40 <> -40 or
+        from 140 < 180  <> -180 > -140 */
+    executeWaveTask: function() {
+        
     },
     
     lastTaskFailed: false,
