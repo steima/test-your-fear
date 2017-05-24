@@ -176,7 +176,7 @@ var tyf = {
             }
         }
         return true;
-    }
+    },
     
     /** Check if the timeseries contains a 360° pattern in alpha */
     executeSpinTask: function() {
