@@ -20,6 +20,10 @@ div.slide {
     height: 100vh;
 }
 
+div.hidden {
+    display: none;
+}
+
 div#startscreen {
     background-color: @rosa;
     
@@ -83,6 +87,23 @@ div#startscreen {
         font-size: 3.7vh;
         width: 90%;
         text-align: center;
-    }
+    }   
+}
+
+div#schimpfwort {
+    background-color: #F5E54F;
     
+    div.title {
+        color: #ED4873;
+        left: 50%;
+        top: 50%;
+        text-align: center;
+        
+        transform: translate(-50%, -50%);
+
+        position: absolute;
+        font-size: @title-font-size;
+        width: 70%;
+        line-height: 90%;
+    }
 }
