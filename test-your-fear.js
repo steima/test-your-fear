@@ -177,7 +177,15 @@ var tyf = {
         }
         
         if(segemnts.length == 12) {
-            this.taskSuccess();
+            var allSegmentsFilled = true;
+            for(var i=0;i<segemnts.length;i++) {
+                if(!segemnts[i]) {
+                    allSegmentsFilled = false;
+                }
+            }
+            if(allSegmentsFilled) {
+                this.taskSuccess();
+            }
         }
     },
     
