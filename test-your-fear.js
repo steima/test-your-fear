@@ -168,6 +168,16 @@ var tyf = {
         }
     },
     
+    /** Check if an array is all true */
+    arrayTrue: function(arr) {
+        for(var i=0;i<arr.length;i++) {
+            if(!arr[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     /** Check if the timeseries contains a 360° pattern in alpha */
     executeSpinTask: function() {
         var segments = [];
@@ -177,16 +187,8 @@ var tyf = {
             segments[s] = true;
         }
         
-        if(segments.length == 12) {
-            var allSegmentsFilled = true;
-            for(var i=0;i<segments.length;i++) {
-                if(!segments[i]) {
-                    allSegmentsFilled = false;
-                }
-            }
-            if(allSegmentsFilled) {
-                this.taskSuccess();
-            }
+        if(segments.length == 12 && this.arrayTrue(segments)) {
+            this.taskSuccess();
         }
     },
     
@@ -194,7 +196,25 @@ var tyf = {
         from 40 <> -40 or
         from 140 < 180  <> -180 > -140 */
     executeWaveTask: function() {
+        var segments = [];
+        for(var i=0;i<this.orientationData.length;i++) {
+            var orientation = this.orientationData[i];
+            var beta = orientation.beta;
+            if(beta > 100) {
+                beta = 180 - beta;
+            }else if(beta < -100) {
+                beta = 180 + beta;
+            }
+            beta = beta + 40;
+            if(beta < 80 && beta > 0) {
+                var s = Math.floor(beta/10);
+                segments[s] = true;
+            }
+        }
         
+        if(segments.length == 8 && this.arrayTrue(segments)) {
+            this.taskSuccess();
+        }
     },
     
     lastTaskFailed: false,
