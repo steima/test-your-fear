@@ -93,8 +93,7 @@ var tyf = {
     
     /** Select tasks at random */
     selectTask: function() {
-        // return this.selectRandomFromArray(this.aufgaben);
-        return this.aufgaben[0];
+        return this.selectRandomFromArray(this.aufgaben);
     },
     
     taskTimeout: null,
@@ -143,6 +142,7 @@ var tyf = {
     executeTask: function() {
         switch(this.selectedTask.taskKey) {
             case 'aliens': this.executeAlienTask();
+            case 'spin': this.executeSpinTask();
         }
     },
     
@@ -163,6 +163,20 @@ var tyf = {
         }
         
         if(found0DegreeGamma && found90DegreeGamma) {
+            this.taskSuccess();
+        }
+    },
+    
+    /** Check if the timeseries contains a 360° pattern */
+    executeSpinTask: function() {
+        var segemnts = [];
+        for(var i=0;i<this.orientationData.length;i++) {
+            var orientation = this.orientationData[i];
+            var s = Math.floor(orientation.alpha/30);
+            segemnts[s] = true;
+        }
+        
+        if(segemnts.length == 12) {
             this.taskSuccess();
         }
     },
