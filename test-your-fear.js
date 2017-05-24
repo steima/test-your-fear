@@ -98,8 +98,7 @@ var tyf = {
     
     /** Select tasks at random */
     selectTask: function() {
-        // return this.selectRandomFromArray(this.aufgaben);
-        return this.aufgaben[4];
+        return this.selectRandomFromArray(this.aufgaben);
     },
     
     taskTimeout: null,
@@ -147,9 +146,10 @@ var tyf = {
     /** Depending on the task key a certain helper function is called */
     executeTask: function() {
         switch(this.selectedTask.taskKey) {
-            case 'aliens': this.executeAlienTask();
-            case 'spin': this.executeSpinTask();
-            case 'wave': this.executeWaveTask();
+            case 'aliens': this.executeAlienTask(); break;
+            case 'spin': this.executeSpinTask(); break;
+            case 'scare': this.executeScareTask(); break;
+            case 'wave': this.executeWaveTask(); break;
         }
     },
     
@@ -198,11 +198,20 @@ var tyf = {
         }
     },
     
+    /** Check if the accel delta is big enough */
+    executeScareTask: function() {
+        var scareThreshold = 4;
+        if(this.accelerometerDelta) {
+            if(this.accelerometerDelta.x > scareThreshold || this.accelerometerDelta.y > scareThreshold || this.accelerometerDelta.z > scareThreshold ) {
+                this.taskSuccess();
+            }
+        }
+    },
+    
     /** Check if the timeseries contains a pattern in beta which is
         from 40 <> -40 or
         from 140 < 180  <> -180 > -140 */
     executeWaveTask: function() {
-        this.log('wave task');
         var segments = [];
         var smallestBeta = 1000000;
         var largestBeta = -1000000;
@@ -309,6 +318,47 @@ var tyf = {
         tyf.orientationData = [];
     },
     
+    /** Start tracking of device motion events */
+    trackDeviceMotion: function() {
+        if(window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', tyf.handleDeviceMotion, false);
+        }else{
+            $('#accelStatus').html('Der Bewegunggsensor in deinem Gerät funktioniert leider nicht!');
+            $('#accelStatus').show();
+        }
+    },
+    
+    lastAccelerometerUpdate: null,
+    lastAccelerometerData: null,
+    accelerometerDelta: null,
+    accelMax: 0,
+    
+    /** Handle device motion events */
+    handleDeviceMotion: function(evt) {
+        var now = Date.now();
+        if(!tyf.lastAccelerometerUpdate || now - tyf.lastAccelerometerUpdate > 50) {
+            if(tyf.lastAccelerometerData) {
+                tyf.accelerometerDelta = {
+                    x: Math.abs(tyf.lastAccelerometerData.x - evt.acceleration.x),
+                    y: Math.abs(tyf.lastAccelerometerData.y - evt.acceleration.y),
+                    z: Math.abs(tyf.lastAccelerometerData.z - evt.acceleration.z),
+                };
+                $('#accelX').html(tyf.accelerometerDelta.x.toFixed(2));
+                $('#accelY').html(tyf.accelerometerDelta.y.toFixed(2));
+                $('#accelZ').html(tyf.accelerometerDelta.z.toFixed(2));
+                tyf.accelMax = Math.max(tyf.accelMax, tyf.accelerometerDelta.x, tyf.accelerometerDelta.y, tyf.accelerometerDelta.z);
+                $('#accelMax').html(tyf.accelMax.toFixed(2));
+            }
+            tyf.lastAccelerometerData = {
+                x: evt.acceleration.x,
+                y: evt.acceleration.y,
+                z: evt.acceleration.z,
+                timestamp: now
+            };
+            tyf.lastAccelerometerUpdate = now;
+        }
+    },
+    
     /** If we are on the ergebnis then we need to decide how to handle the click */
     handleErgebnisClick: function() {
         if(this.lastTaskFailed) {
@@ -343,11 +393,21 @@ var tyf = {
             tyf.handleErgebnisClick();
         });
     },
+    
+    /** On localhost and my local net print debug info */
+    activateDebug: function() {
+        var h = location.host;
+        if(h == 'localhost' || h.startsWith('192.')) {
+            $('#accelStatus').removeClass('hidden');
+        }
+    },
 	
     /** Performs setup of the app and switches to the startscreen afterwards */
 	init: function () {
+        this.activateDebug();
         this.setupHandlers();
         this.trackDeviceOrientation();
+        this.trackDeviceMotion();
         this.showSlide('startscreen');
 	}
 
