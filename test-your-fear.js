@@ -93,7 +93,8 @@ var tyf = {
     
     /** Select tasks at random */
     selectTask: function() {
-        return this.selectRandomFromArray(this.aufgaben);
+        // return this.selectRandomFromArray(this.aufgaben);
+        return this.aufgaben[0];
     },
     
     taskTimeout: null,
