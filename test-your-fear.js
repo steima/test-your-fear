@@ -182,9 +182,9 @@ var tyf = {
     
     /** Handle device orientation event */
     handleDeviceOrientation: function(evt) {
-        $('#orientG').html(evt.gamma);
-        $('#orientB').html(evt.beta);
-        $('#orientA').html(evt.alpha);
+        $('#orientG').html(evt.gamma.toFixed(3));
+        $('#orientB').html(evt.beta.toFixed(3));
+        $('#orientA').html(evt.alpha.toFixed(3));
     },
     
     /** If we are on the ergebnis then we need to decide how to handle the click */
