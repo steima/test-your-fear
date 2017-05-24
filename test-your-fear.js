@@ -98,6 +98,17 @@ var tyf = {
     },
     
     taskTimeout: null,
+    taskInterval: null,
+    
+    /** Stop the background jobs */
+    clearJobs: function() {
+        if(this.taskTimeout) {
+            clearTimeout(this.taskTimeout);
+        }
+        if(this.taskInterval) {
+            clearInterval(this.taskInterval);
+        }        
+    },
     
     /** Select a task and setup the ui */
     setupTask: function(task) {
@@ -116,7 +127,9 @@ var tyf = {
         }, 15000);
         
         this.showSlide('anweisung');
-        this.executeTask();
+        this.taskInterval = setInterval(function() {
+            tyf.executeTask(); 
+        }, 200);
     },
     
     /** Select a random task and init the UI with it */
@@ -127,7 +140,30 @@ var tyf = {
     
     /** Depending on the task key a certain helper function is called */
     executeTask: function() {
-        console.log('executing task ' + this.selectedTask.taskKey);
+        switch(this.selectedTask.taskKey) {
+            case 'aliens': this.executeAlienTask();
+        }
+    },
+    
+    /** Check if the timeseries has a tilting pattern */
+    executeAlienTask: function() {
+        var found90DegreeGamma;
+        var found0DegreeGamma;
+        
+        for(var i=0;i<this.orientationData.length;i++) {
+            var orientation = this.orientationData[i];
+            var gammaAbs = Math.abs(orientation.gamma);
+            if(gammaAbs > 70) {
+                found90DegreeGamma = orientation.timestamp;
+            }
+            if(found90DegreeGamma && orientation.timestamp > found90DegreeGamma && orientation.gamma < 20) {
+                found0DegreeGamma = orientation.timestamp;
+            }
+        }
+        
+        if(found0DegreeGamma && found90DegreeGamma) {
+            this.taskSuccess();
+        }
     },
     
     lastTaskFailed: false,
@@ -135,6 +171,7 @@ var tyf = {
     /** Switch to the outcome slide and mark it as error */
     taskFailed: function() {
         this.lastTaskFailed = true;
+        this.clearJobs();
         $('#outcome').html(this.errorOutcome.outcome);
         $('#outcomesub').html(this.errorOutcome.sub);
         $('#outcomeinst').html(this.errorOutcome.inst);
@@ -152,9 +189,7 @@ var tyf = {
     /** Task was executed correctly */
     taskSuccess: function() {
         this.lastTaskFailed = false;
-        if(this.taskTimeout) {
-            clearTimeout(this.taskTimeout);
-        }
+        this.clearJobs();
         
         $('#ergebnis').removeClass('turkisgelb');
         $('#ergebnis').removeClass('blaugelb');
@@ -173,7 +208,7 @@ var tyf = {
     /** Start tracking of device orientation events */
     trackDeviceOrientation: function() {
         if(window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', function(evt) { tyf.handleDeviceOrientation(evt); }, false);
+            window.addEventListener('deviceorientation', tyf.handleDeviceOrientation, false);
         }else{
             $('#accelStatus').html('Der Bewegunggsensor in deinem Gerät funktioniert leider nicht!');
             $('#accelStatus').show();
@@ -189,15 +224,16 @@ var tyf = {
     /** Handle device orientation event */
     handleDeviceOrientation: function(evt) {
         var now = Date.now();
-        if(!this.lastOrientationUpdate || now - this.lastOrientationUpdate > 200) {
-            this.lastOrientationUpdate = now;
+        if(!tyf.lastOrientationUpdate || now - tyf.lastOrientationUpdate > 200) {
+            tyf.lastOrientationUpdate = now;
             $('#orientG').html(evt.gamma.toFixed(3));
             $('#orientB').html(evt.beta.toFixed(3));
             $('#orientA').html(evt.alpha.toFixed(3));
-            this.orientationData[this.orientationDataInsertPosition] = {
+            tyf.orientationData[tyf.orientationDataInsertPosition] = {
+                timestamp: now,
                 gamma: evt.gamma, beta: evt.beta, alpha: evt.alpha
             };
-            this.orientationDataInsertPosition = (this.orientationDataInsertPosition + 1) % 100;
+            tyf.orientationDataInsertPosition = (tyf.orientationDataInsertPosition + 1) % 100;
         }   
     },
     
