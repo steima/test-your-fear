@@ -127,6 +127,7 @@ var tyf = {
         }, 15000);
         
         this.showSlide('anweisung');
+        this.resetOrientationData();
         this.taskInterval = setInterval(function() {
             tyf.executeTask(); 
         }, 200);
@@ -163,7 +164,6 @@ var tyf = {
         
         if(found0DegreeGamma && found90DegreeGamma) {
             this.taskSuccess();
-            this.resetOrientationData();
         }
     },
     
