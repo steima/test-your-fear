@@ -29,7 +29,7 @@ div#startscreen {
     
     div.title {
         color: @gelb;
-        left: 52%;
+        left: 50%;
         top: 32%;
 
         transform: translate(-50%, -50%);
@@ -106,4 +106,111 @@ div#schimpfwort {
         width: 70%;
         line-height: 90%;
     }
+}
+
+div#anweisung {
+    div.title {
+        left: 50%;
+        top: 32%;
+
+        transform: translate(-50%, -50%);
+
+        position: absolute;
+        font-size: @title-font-size;
+        width: 70%;
+        line-height: 90%;
+    }
+    div.teaser {
+        position: absolute;
+        left: 45%;
+        top: 80%;
+        transform: translate(-50%, -50%) rotate(-1.7deg);
+        width: 80%;
+        font-size: 5.1vh;
+    }
+}
+
+div#ergebnis {
+    div.outcome {
+        left: 50%;
+        top: 32%;
+        
+        text-align: center;
+
+        transform: translate(-50%, -50%);
+
+        position: absolute;
+        font-size: 27vh;
+        width: 70%;
+        line-height: 90%;
+    }
+    
+    div.sub {
+        left: 50%;
+        top: 57%;
+        
+        font-size: 12vh;
+        line-height: 80%;
+        
+        position: absolute;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        width: 90%;
+    }
+    
+    div.inst {
+        position: absolute;
+        left: 45%;
+        top: 80%;
+        transform: translate(-50%, -50%) rotate(-1.7deg);
+        width: 80%;
+        font-size: 5.1vh;
+    }
+}
+
+div.turkisgelb {
+    background-color: #43BAB5;
+    div.title { color: #EDE14C; }
+    div.teaser { color: #FFFFFF; }
+}
+
+div.blaugelb {
+    background-color: #4B76B5;
+    div.title { color: #EEE24C; }
+    div.teaser { color: #FFFFFF; }
+}
+
+div.orangepink {
+    background-color: #F4843C;
+    div.title { color: #ED4873; }
+    div.teaser { color: #FFFFFF; }
+}
+
+div.blaupink {
+    background-color: #7ACFEA;
+    div.title { color: #ED4873; }
+    div.teaser { color: #FFFFFF; }
+}
+
+div.pinkorange {
+    background-color: #EC445F;
+    div.title { color: #FCAD42; }
+    div.teaser { color: #FFFFFF; }
+}
+
+div.errorOutcome {
+    background-color: #FFC244;
+    div.title { color: #50BDB6; }
+    div.teaser { color: #FFFFFF; }    
+}
+
+
+div#accelStatus {
+    position: absolute;
+    z-index: 1000;
+    width: 40%;
+    left: 50%;
+    bottom: 0%;
+    transform: translate(-50%, 0%);
+    text-align: center;
 }
