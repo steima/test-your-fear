@@ -182,6 +182,10 @@ var tyf = {
     
     lastOrientationUpdate: null,
     
+    /** Simple ring buffer for orientation data */
+    orientationData: [],
+    orientationDataInsertPosition: 0,
+    
     /** Handle device orientation event */
     handleDeviceOrientation: function(evt) {
         var now = Date.now();
@@ -190,6 +194,10 @@ var tyf = {
             $('#orientG').html(evt.gamma.toFixed(3));
             $('#orientB').html(evt.beta.toFixed(3));
             $('#orientA').html(evt.alpha.toFixed(3));
+            this.orientationData[this.orientationDataInsertPosition] = {
+                gamma: evt.gamma, beta: evt.beta, alpha: evt.alpha
+            };
+            this.orientationDataInsertPosition = (this.orientationDataInsertPosition + 1) % 100;
         }   
     },
     
