@@ -3,6 +3,11 @@
 
 var tyf = {
     
+    /** Output info to a log div */
+    log: function(text) {
+        $('#log').html(text);
+    },
+    
     /** List of available curse words */
     shimpfwoerter: [
         'Du Weichei!',
@@ -93,7 +98,8 @@ var tyf = {
     
     /** Select tasks at random */
     selectTask: function() {
-        return this.selectRandomFromArray(this.aufgaben);
+        // return this.selectRandomFromArray(this.aufgaben);
+        return this.aufgaben[4];
     },
     
     taskTimeout: null,
@@ -196,22 +202,31 @@ var tyf = {
         from 40 <> -40 or
         from 140 < 180  <> -180 > -140 */
     executeWaveTask: function() {
+        this.log('wave task');
         var segments = [];
+        var smallestBeta = 1000000;
+        var largestBeta = -1000000;
         for(var i=0;i<this.orientationData.length;i++) {
             var orientation = this.orientationData[i];
             var beta = orientation.beta;
             if(beta > 100) {
-                beta = 180 - beta;
+                beta = beta - 180;
             }else if(beta < -100) {
                 beta = 180 + beta;
             }
             beta = beta + 40;
             if(beta < 80 && beta > 0) {
+                if(beta < smallestBeta) {
+                    smallestBeta = beta.toFixed(2);
+                }
+                if(beta > largestBeta) {
+                    largestBeta = beta.toFixed(2);
+                }
                 var s = Math.floor(beta/10);
                 segments[s] = true;
             }
         }
-        
+                
         if(segments.length == 8 && this.arrayTrue(segments)) {
             this.taskSuccess();
         }
