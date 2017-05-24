@@ -113,7 +113,7 @@ var tyf = {
         
         this.taskTimeout = setTimeout(function() {
             tyf.taskFailed();
-        }, 1000);
+        }, 15000);
         
         this.showSlide('anweisung');
         this.executeTask();
