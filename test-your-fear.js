@@ -149,7 +149,7 @@ var tyf = {
         var t;
         do {
             t = tyf.selectTask();
-        } while(t.taskKey == this.selectedTask.taskKey);
+        } while(this.selectedTask && t.taskKey == this.selectedTask.taskKey);
         tyf.setupTask(t);
     },
     
