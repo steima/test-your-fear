@@ -36,8 +36,11 @@ var tyf = {
             successTitle: 'Yippie!',
             successSubTitle: 'Du hast keine Angst!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir die Antwort der Aliens an.',
+            animation: 'anim/aliens.gif',
             style: 'turkisgelb'
         },
+        /* 
+        // disabled due to lack of audio support
         {
             taskKey: 'scream',
             befehl: 'Schrei so laut du kannst!',
@@ -45,8 +48,9 @@ var tyf = {
             successTitle: 'Wow!',
             successSubTitle: 'Du kannst schreien!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an wie wir schreien.',
+            animation: 'anim/aliens.gif',
             style: 'blaugelb'
-        },
+        }, */
         {
             taskKey: 'spin',
             befehl: 'Dreh dich bis du abhebst!',
@@ -54,6 +58,7 @@ var tyf = {
             successTitle: 'Super!',
             successSubTitle: 'Du bist abgehoben!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an, wann wir abheben.',
+            animation: 'anim/spin.gif',
             style: 'orangepink'
         },
         {
@@ -63,6 +68,7 @@ var tyf = {
             successTitle: 'Juhu!',
             successSubTitle: 'Du hast jemanden erschreckt!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an wie wir uns schrecken.',
+            animation: 'anim/scare.gif',
             style: 'blaupink'
         },
         {
@@ -72,6 +78,7 @@ var tyf = {
             successTitle: 'Wow!',
             successSubTitle: 'Du bist mutig!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an wann wir Mut brauchen.',
+            animation: 'anim/wave.gif',
             style: 'pinkorange'
         }
     ],
@@ -139,7 +146,10 @@ var tyf = {
     
     /** Select a random task and init the UI with it */
     setupRandomTask: function() {
-        var t = tyf.selectTask();
+        var t;
+        do {
+            t = tyf.selectTask();
+        } while(t.taskKey == this.selectedTask.taskKey);
         tyf.setupTask(t);
     },
     
@@ -364,8 +374,14 @@ var tyf = {
         if(this.lastTaskFailed) {
             this.setupRandomTask();
         }else{
-            this.showSlide('startscreen');
+            $('#imgholder').attr('src', this.selectedTask.animation);
+            this.showSlide('animation');
         }
+    },
+    
+    /** Once we show the animation the user can move to the next screen */
+    handleAnimationClick: function() {
+        this.setupRandomTask();  
     },
     
     /** Show a slide and hide all others */
@@ -391,6 +407,9 @@ var tyf = {
         });
         $('#ergebnis').click(function () {
             tyf.handleErgebnisClick();
+        });
+        $('#animation').click(function() {
+            tyf.handleAnimationClick();
         });
     },
     
