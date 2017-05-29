@@ -36,7 +36,17 @@ var tyf = {
             successTitle: 'Yippie!',
             successSubTitle: 'Du hast keine Angst!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir die Antwort der Aliens an.',
-            animation: 'anim/aliens.gif',
+            animation: [
+                'anim/caroline_wimmer.gif',
+                'anim/jan_weiler.gif',
+                'anim/judith_breitenbrunner.gif',
+                'anim/julia_heinisch.gif',
+                'anim/nicolas_ronald_wintschnig_1.gif',
+                'anim/michael_strohl_1.gif',
+                'anim/michael_strohl_2.gif',
+                'anim/nicolas_ronald_wintschnig_2.gif',
+                'anim/nicolas_ronald_wintschnig_3.gif'
+            ],
             style: 'turkisgelb'
         },
         /* 
@@ -58,7 +68,7 @@ var tyf = {
             successTitle: 'Super!',
             successSubTitle: 'Du bist abgehoben!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an, wann wir abheben.',
-            animation: 'anim/spin.gif',
+            animation: [ 'anim/spin.gif' ], 
             style: 'orangepink'
         },
         {
@@ -68,7 +78,7 @@ var tyf = {
             successTitle: 'Juhu!',
             successSubTitle: 'Du hast jemanden erschreckt!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an wie wir uns schrecken.',
-            animation: 'anim/scare.gif',
+            animation: [ 'anim/tina_astleithner.gif', 'anim/salvatore_viviano.gif', 'anim/anna_fessler_1.gif', 'anim/judith_breitenbrunner.gif', 'anim/anna_fessler_2.gif' ],
             style: 'blaupink'
         },
         {
@@ -78,7 +88,7 @@ var tyf = {
             successTitle: 'Wow!',
             successSubTitle: 'Du bist mutig!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an wann wir Mut brauchen.',
-            animation: 'anim/wave.gif',
+            animation: [ 'anim/tina_astleithner.gif', 'anim/anna_fessler_2.gif' ],
             style: 'pinkorange'
         }
     ],
@@ -374,7 +384,8 @@ var tyf = {
         if(this.lastTaskFailed) {
             this.setupRandomTask();
         }else{
-            $('#imgholder').attr('src', this.selectedTask.animation);
+            var animSrc = this.selectRandomFromArray(this.selectedTask.animation);
+            $('#imgholder').attr('src', animSrc);
             this.showSlide('animation');
         }
     },
