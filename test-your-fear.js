@@ -58,7 +58,7 @@ var tyf = {
             successTitle: 'Wow!',
             successSubTitle: 'Du kannst schreien!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an wie wir schreien.',
-            animation: 'anim/aliens.gif',
+            animation: [ 'anim/aliens.gif' ],
             style: 'blaugelb'
         }, */
         {
