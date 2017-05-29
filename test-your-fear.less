@@ -15,9 +15,68 @@ body {
     font-family: "Circular Std Bold Italic";
 }
 
-div.slide {
-    width: 100vw;
-    height: 100vh;
+@media screen and (orientation: landscape) {
+    div.slide {
+        width: 100vw;
+        height: 100vh;
+    }
+       
+    div.portraitinfo {
+        display: none;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    div.slide {
+        display: none;
+    }
+    
+    div.portraitinfo {
+        background-color: @rosa;
+        
+        display: block;
+        width: 100vw;
+        height: 100vh;     
+        
+        div.title {
+            color: @gelb;
+            left: 50%;
+            top: 32%;
+
+            transform: translate(-50%, -50%);
+
+            position: absolute;
+            font-size: @title-font-size;
+            width: 70%;
+            line-height: 90%;            
+        }
+        
+        div.instruction {
+            color: @weiss;
+            position: absolute;
+            left: 45%;
+            top: 63%;
+            transform: translate(-50%, -50%) rotate(-1.7deg);
+            width: 80%;
+            font-size: 5.1vh;
+        }
+        
+        div.imprint {
+            color: @gelb;
+            position: absolute;
+            left: 50%;
+            top: 95%;
+            transform: translate(-50%, -50%);
+            font-size: 3.7vh;
+            width: 90%;
+            text-align: center;
+            
+            a:link, a:visited {
+                text-decoration: none;
+                color: @gelb;
+            }
+        }
+    }
 }
 
 div.hidden {
@@ -87,6 +146,12 @@ div#startscreen {
         font-size: 3.7vh;
         width: 90%;
         text-align: center;
+        
+                    
+        a:link, a:visited {
+            text-decoration: none;
+            color: @gelb;
+        }
     }   
 }
 
