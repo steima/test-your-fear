@@ -385,7 +385,7 @@ var tyf = {
             this.setupRandomTask();
         }else{
             var animSrc = this.selectRandomFromArray(this.selectedTask.animation);
-            $('#imgholder').attr('src', animSrc);
+            $('#imgholder').attr('src', this.animationPrefix + animSrc);
             this.showSlide('animation');
         }
     },
@@ -424,11 +424,15 @@ var tyf = {
         });
     },
     
+    animationPrefix: '',
+    
     /** On localhost and my local net print debug info */
     activateDebug: function() {
         var h = location.host;
         if(h == 'localhost' || h.startsWith('192.')) {
             $('#accelStatus').removeClass('hidden');
+        }else{
+            this.animationPrefix = '/apps/test-your-fear/';
         }
     },
 	
