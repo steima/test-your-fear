@@ -68,7 +68,15 @@ var tyf = {
             successTitle: 'Super!',
             successSubTitle: 'Du bist abgehoben!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an, wann wir abheben.',
-            animation: [ 'anim/spin.gif' ], 
+            animation: [
+                'anim/alexandra_kahl_tina_grassegger_1.gif',
+                'anim/alexandra_kahl_tina_grassegger_2.gif',
+                'anim/alexandra_kahl_tina_grassegger_3.gif',
+                'anim/alexandra_kahl_tina_grassegger_4.gif',
+                'anim/alexandra_kahl_tina_grassegger_5.gif',
+                'anim/mariya_zhariy_twana_kushnau.gif',
+                'anim/paul_riedmann_redi_ferhati.gif'
+            ],
             style: 'orangepink'
         },
         {
@@ -78,7 +86,15 @@ var tyf = {
             successTitle: 'Juhu!',
             successSubTitle: 'Du hast jemanden erschreckt!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an wie wir uns schrecken.',
-            animation: [ 'anim/tina_astleithner.gif', 'anim/salvatore_viviano.gif', 'anim/anna_fessler_1.gif', 'anim/judith_breitenbrunner.gif', 'anim/anna_fessler_2.gif' ],
+            animation: [
+                'anim/tina_astleithner.gif',
+                'anim/salvatore_viviano.gif',
+                'anim/anna_fessler_1.gif',
+                'anim/judith_breitenbrunner.gif',
+                'anim/anna_fessler_2.gif',
+                'anim/mariya_zhariy_twana_kushnau.gif',
+                'anim/paul_riedmann_redi_ferhati.gif'
+            ],
             style: 'blaupink'
         },
         {
@@ -88,7 +104,17 @@ var tyf = {
             successTitle: 'Wow!',
             successSubTitle: 'Du bist mutig!',
             successTeaser: 'Berühre den Bildschirm und schau\' dir an wann wir Mut brauchen.',
-            animation: [ 'anim/tina_astleithner.gif', 'anim/anna_fessler_2.gif' ],
+            animation: [
+                'anim/tina_astleithner.gif',
+                'anim/anna_fessler_2.gif',
+                'anim/alexandra_kahl_tina_grassegger_1.gif',
+                'anim/alexandra_kahl_tina_grassegger_2.gif',
+                'anim/alexandra_kahl_tina_grassegger_3.gif',
+                'anim/alexandra_kahl_tina_grassegger_4.gif',
+                'anim/alexandra_kahl_tina_grassegger_5.gif',
+                'anim/mariya_zhariy_twana_kushnau.gif',
+                'anim/paul_riedmann_redi_ferhati.gif'                
+            ],
             style: 'pinkorange'
         }
     ],
